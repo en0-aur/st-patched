@@ -1,0 +1,13 @@
+# makepkg build artifacts
+/src/
+/pkg/
+/st-*/
+*.pkg.tar.zst
+*.pkg.tar.*
+
+# downloaded sources
+/st-*.tar.gz
+/st-scrollback-*.diff
+/st-xresources-*.diff
+
+# NOTE: config-tweaks.diff is a tracked source file, not ignored.
