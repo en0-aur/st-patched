@@ -8,7 +8,6 @@ arch=('x86_64')
 url="https://st.suckless.org/"
 license=('MIT')
 depends=('libxft' 'libxext' 'freetype2' 'fontconfig' 'libxrender')
-makedepends=('ncurses')
 provides=('st')
 conflicts=('st')
 source=("https://dl.suckless.org/st/st-${pkgver}.tar.gz"
@@ -43,11 +42,10 @@ package() {
 	install -Dm644 st.1 "${pkgdir}/usr/share/man/man1/st.1"
 	sed -i "s/VERSION/${pkgver}/g" "${pkgdir}/usr/share/man/man1/st.1"
 
-	# Install terminfo. The Makefile's `tic -sx st.info` writes to the host
-	# terminfo db and fails/escapes under fakeroot, so run tic with an explicit
-	# output dir instead.
-	install -d "${pkgdir}/usr/share/terminfo"
-	tic -sx -o "${pkgdir}/usr/share/terminfo" st.info
+	# Terminfo is intentionally NOT installed. The ncurses package already
+	# provides the `st` and `st-256color` entries that $TERM resolves to, so
+	# shipping our own would conflict with ncurses-owned files. (This is also
+	# why the Makefile's `tic` step is skipped.)
 
 	install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
