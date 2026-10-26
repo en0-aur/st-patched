@@ -7,6 +7,7 @@ pkgdesc="Simple terminal for X, patched with scrollback and runtime X Resources 
 arch=('x86_64')
 url="https://st.suckless.org/"
 license=('MIT')
+# NOTE: if you change depends or makedepends, update the Debian name mapping in debian-install.sh.
 depends=('libxft' 'libxext' 'freetype2' 'fontconfig' 'libxrender')
 provides=('st')
 conflicts=('st')
